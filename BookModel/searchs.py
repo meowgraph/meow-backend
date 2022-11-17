@@ -24,7 +24,3 @@ def searchByTranslator(_translator):
 def searchByPublisher(_publisher):
     res = Book.objects.filter(publisher=_publisher)
     return res
-
-
-
-

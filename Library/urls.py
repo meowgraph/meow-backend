@@ -20,7 +20,7 @@ from service import searchs, tests
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('createTestdb/', tests.createTestdb),
-    path('search/<string:content>', searchs.search),
+    path("admin/", admin.site.urls),
+    path("createTestdb/", tests.createTestdb),
+    path("search/<string:content>", searchs.search),
 ]

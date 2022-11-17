@@ -12,8 +12,13 @@ def searchByEntityandRelation(head, tail, relation):
     res = []
     for h in heads:
         for t in tails:
-            res.extend(graph.run(
-                f"MATCH p=(h)-[r]-(t) WHERE h.name='{h.name}' AND h.type='{h.type}' AND "
-                f"t.name='{t.name}' AND t.type='{t.type}' AND r.name='{relation.name}' RETURN p").data())
+            res.extend(
+                graph.run(
+                    f"MATCH p=(h)-[r]-(t) WHERE "
+                    f"h.name='{h.name}' AND h.type='{h.type}' AND "
+                    f"t.name='{t.name}' AND t.type='{t.type}' AND "
+                    f"r.name='{relation.name}' RETURN p"
+                ).data()
+            )
 
     return res

@@ -3,8 +3,8 @@ name = "Meow"
 version = "0.0.1"
 description = ""
 authors = [
-    {name = "Lingi Wu", email = "edithwuly@163.com"},
-    {name = "Yuchen Cheng", email = "rudeigerc@gmail.com"},
+    { name = "Lingi Wu", email = "edithwuly@163.com" },
+    { name = "Yuchen Cheng", email = "rudeigerc@gmail.com" },
 ]
 dependencies = [
     "django>=3.2.16",
@@ -13,7 +13,7 @@ dependencies = [
 ]
 requires-python = ">=3.9"
 readme = "README.md"
-license = {text = "MIT"}
+license = { text = "MIT" }
 
 [project.urls]
 Homepage = "https://github.com/meowgraph/meow-backend"
@@ -32,6 +32,9 @@ dev = [
     "black>=22.10.0",
     "isort>=5.10.1",
 ]
+
+[tool.pdm.scripts]
+start = "python manage.py runserver"
 
 [tool.isort]
 profile = "black"

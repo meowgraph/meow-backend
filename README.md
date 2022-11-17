@@ -13,7 +13,7 @@ pdm install
 ### Run
 
 ```shell
-pdm run python manage.py runserver
+pdm run start
 ```
 
 ## License
