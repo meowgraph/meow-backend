@@ -1,6 +1,8 @@
 import json
-from Library.settings import graph
+
 from py2neo import Node, Relationship
+
+from Library.settings import graph
 
 
 def importEntity(entitiesFile):

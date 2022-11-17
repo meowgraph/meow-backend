@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 
-from BookModel.tests import createMySQL
 from GraphModel.tests import createNeo4j
 
 

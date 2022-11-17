@@ -1,6 +1,4 @@
 from BookModel.models import Book
-from py2neo import Node, Relationship
-from Library.settings import graph
 
 
 def searchByISBN(_ISBN):
