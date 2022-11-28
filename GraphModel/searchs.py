@@ -1,8 +1,22 @@
+from py2neo import NodeMatcher
+
+import BookModel.searchs
 from Library.settings import graph
 
 
 def extendTripple(entity):
     res = [entity]
+    return res
+
+
+def searchByEntity(entity):
+    res = []
+    node_matcher = NodeMatcher(graph)
+    entities = list(node_matcher.match(entity["type"]).where(name=entity["name"]))
+    for entity in entities:
+        belong = entity['belong']
+        for ISBN in belong:
+            res.append(BookModel.searchs.searchByISBN(ISBN))
     return res
 
 

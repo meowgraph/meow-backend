@@ -22,5 +22,6 @@ from service import searchs, tests
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("createTestdb/", tests.createTestdb),
-    path("search/<string:content>", searchs.search),
+    path("testSearch/", tests.testSearch),
+    path("search/<str:content>", searchs.search),
 ]
