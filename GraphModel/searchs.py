@@ -1,4 +1,4 @@
-from py2neo import NodeMatcher
+from py2neo import NodeMatcher, Node, Path, RelationshipMatcher
 
 import BookModel.searchs
 from Library.settings import graph
@@ -21,18 +21,16 @@ def searchByEntity(entity):
 
 
 def searchByEntityandRelation(head, tail, relation):
-    heads = extendTripple(head)
-    tails = extendTripple(tail)
     res = []
+    node_matcher = NodeMatcher(graph)
+    relation_matcher = RelationshipMatcher(graph)
+    heads = list(node_matcher.match(head["type"]).where(name=head["name"]))
+    tails = list(node_matcher.match(tail["type"]).where(name=tail["name"]))
     for h in heads:
         for t in tails:
-            res.extend(
-                graph.run(
-                    f"MATCH p=(h)-[r]-(t) WHERE "
-                    f"h.name='{h.name}' AND h.type='{h.type}' AND "
-                    f"t.name='{t.name}' AND t.type='{t.type}' AND "
-                    f"r.name='{relation.name}' RETURN p"
-                ).data()
-            )
-
+            relations = list(relation_matcher.match(nodes=(h, t), r_type=relation))
+            for relation in relations:
+                belong = relation['belong']
+                for ISBN in belong:
+                    res.append(BookModel.searchs.searchByISBN(ISBN))
     return res
