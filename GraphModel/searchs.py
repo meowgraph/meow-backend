@@ -4,11 +4,6 @@ import BookModel.searchs
 from Library.settings import graph
 
 
-def extendTripple(entity):
-    res = [entity]
-    return res
-
-
 def searchByEntity(entity):
     res = []
     node_matcher = NodeMatcher(graph)
