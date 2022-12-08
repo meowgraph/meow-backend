@@ -1,18 +1,15 @@
-FROM python:3.10 AS builder
+FROM python:3.7
 
-RUN pip install -U pip setuptools wheel
-RUN pip install pdm
+RUN pip install -U pip setuptools wheel -i https://pypi.tuna.tsinghua.edu.cn/simple && pip install pdm -i https://pypi.tuna.tsinghua.edu.cn/simple && git clone https://github.com/meowgraph/meow-backend.git
 
-COPY pyproject.toml pdm.lock README.md /project/
-COPY src/ /project/src
+COPY data/ /meow-backend/data
 
-WORKDIR /project
+WORKDIR /meow-backend
 RUN mkdir __pypackages__ && pdm install --prod --no-lock --no-editable
 
-FROM python:3.10
+ENV PYTHONPATH=/meow-backend/__pypackages__/3.7/lib
 
-ENV PYTHONPATH=/project/pkgs
-COPY --from=builder /project/__pypackages__/3.10/lib /project/pkgs
+EXPOSE 8000
 
-CMD ["python", "-m", "project"]
+CMD ["pdm", "run", "start"]
 
