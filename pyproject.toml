@@ -38,6 +38,11 @@ dev = [
 [tool.pdm.scripts]
 start = "python manage.py runserver"
 
+[[tool.pdm.source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+name = "tuna"
+
 [tool.isort]
 profile = "black"
 lines_after_imports = 2
