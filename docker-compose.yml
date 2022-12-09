@@ -1,0 +1,30 @@
+version: "3"
+services:
+  backend:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+      - neo4j
+  mysql:
+    image: mysql:5.7
+    ports:
+    - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_DATABASE: library
+      MYSQL_USER: library
+      MYSQL_PASSWORD: 3203
+      TZ: Asia/Shanghai
+  neo4j:
+    image: neo4j:5.2
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./data/neo4j/data:/data
+      - ./data/neo4j/logs:/logs
+      - ./data/neo4j/conf:/conf
