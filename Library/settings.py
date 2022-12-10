@@ -80,14 +80,14 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "library",
-        "HOST": "127.0.0.1",
+        "HOST": "mysql",
         "PORT": 3306,
         "USER": "library",
         "PASSWORD": "3203",
     }
 }
 
-graph = Graph("bolt://localhost:7687", auth=("neo4j", "3203"))
+graph = Graph("neo4j:/neo4j:7474", auth=("neo4j", "3203"))
 
 
 # Password validation

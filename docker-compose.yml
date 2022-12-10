@@ -2,13 +2,14 @@ version: "3"
 services:
   backend:
     build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && pdm run instart"
     ports:
       - 8000:8000
     depends_on:
       - mysql
       - neo4j
   mysql:
-    image: mysql:5.7
+    image: mysql:5.7.16
     ports:
     - 3306:3306
     volumes:
@@ -21,6 +22,11 @@ services:
       TZ: Asia/Shanghai
   neo4j:
     image: neo4j:5.2
+    environment:
+      - NEO4J_AUTH=neo4j/3203
+      - dbms.connectors.default_listen_address=0.0.0.0
+      - dbms.connector.bolt.listen_address=0.0.0.0:7687
+      - dbms.connector.http.listen_address=0.0.0.0:7474
     ports:
       - 7474:7474
       - 7687:7687
