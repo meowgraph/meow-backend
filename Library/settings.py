@@ -87,7 +87,7 @@ DATABASES = {
     }
 }
 
-graph = Graph("neo4j:/neo4j:7474", auth=("neo4j", "3203"))
+graph = Graph(host="neo4j", port="7687", auth=("neo4j", "3203"))
 
 
 # Password validation

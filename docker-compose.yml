@@ -2,7 +2,7 @@ version: "3"
 services:
   backend:
     build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && pdm run instart"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && pdm run start"
     ports:
       - 8000:8000
     depends_on:
@@ -11,7 +11,11 @@ services:
   mysql:
     image: mysql:5.7.16
     ports:
-    - 3306:3306
+      - 3306:3306
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./data/mysql:/var/lib/mysql
     environment:
@@ -20,9 +24,11 @@ services:
       MYSQL_USER: library
       MYSQL_PASSWORD: 3203
       TZ: Asia/Shanghai
+      LANG: C.UTF_8
   neo4j:
-    image: neo4j:5.2
+    image: neo4j:4.0-enterprise
     environment:
+      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
       - NEO4J_AUTH=neo4j/3203
       - dbms.connectors.default_listen_address=0.0.0.0
       - dbms.connector.bolt.listen_address=0.0.0.0:7687
